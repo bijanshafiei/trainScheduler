@@ -17,7 +17,7 @@ $(document).ready(function() {
 // Establishes click function for button to add train
  $("#inputTrain").on("click", function() {
 
- 	// Grabs input values from user
+ 	// Grabs form input values from user
      var name = $('#name').val().trim();
      var destination = $('#destination').val().trim();
      var time = $('#hour').val().trim() + ":" + $('#min').val().trim();
@@ -28,5 +28,20 @@ $(document).ready(function() {
      console.log(time);
      console.log(frequency);
 
+     	// Establishes local object for new train data
+     	var newTrain = {
+         	newName: name,
+         	newDestination: destination,
+         	firstTrainAt: time,
+         	newFrequency: frequency
+     	}
+     	// Save to DB
+     	database.ref().push(newTrain);
+     	// Clear forms
+     	$("#name").val("");
+     	$("#destination").val("");
+     	$("#hour").val("");
+     	$("#min").val("");
+     	$("#frequency").val("");
  	});
  })
